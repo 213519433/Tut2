@@ -1,8 +1,7 @@
 /************************************
 * cpp File for the class Fractions *
-*	  my functions definitions     *
-************************************
-*/
+*	  my functions definitions      *
+************************************/
 
 #include "Fractions.h"
 
@@ -17,26 +16,24 @@ void Fractions::tryBlock(int Nunom, int Dnom)
 	try
 	{
 		if (Dnom == 0) throw Dnom;
-		cout << Nunom << " / " << Dnom;
+		if (Nunom == Dnom || Dnom / abs(gcd(Nunom, Dnom)) == 1)
+		{
+			cout << Nunom / Dnom;
+		}
+		else
+		{
+			cout << Nunom / abs(gcd(Nunom, Dnom)) << " / " << Dnom / abs(gcd(Nunom, Dnom));
+		}
 	}
 	catch (int)
 	{
-		cout << "Math Error! : Division by zero encountered." << endl;
+		cout << "Math Error! : Division by zero encountered.";
 	}
 }
 //Addition
 void Fractions::Add()
 {
-	int dvsr = gcd(abs(d2*n1 + d1*n2), abs(d1*d2));
-
-	if (abs(d2*n1 + d1*n2) == abs(d1*d2) || abs(d1*d2) / dvsr == 1)
-	{
-		tryBlock((d2*n1 + d1*n2), (d1*d2));
-	}
-	else
-	{
-		cout << (d2*n1 + d1*n2) / dvsr << " / " << (d1*d2) / dvsr << endl;
-	}
+	tryBlock((d2*n1 + d1*n2), (d1*d2));
 }
 // Overload Addition
 void Fractions::Add(int Nnum1, int Dnum1, int Nnum2, int Dnum2)
@@ -47,16 +44,7 @@ void Fractions::Add(int Nnum1, int Dnum1, int Nnum2, int Dnum2)
 // Subtraction
 void Fractions::Subtract()
 {
-	int dvsr = gcd(abs(d1*n2 - d2*n1), abs(d1*d2));
-
-	if (abs(d2*n1 - d1*n2) == abs(d1*d2) || (d2*n1 - d1*n2) == 0 || abs(d1*d2) / dvsr == 1)
-	{
-		tryBlock((d2*n1 - d1*n2), (d1*d2));
-	}
-	else
-	{
-		cout << (d2*n1 - d1*n2) / dvsr << " / " << (d1*d2) / dvsr << endl;
-	}
+	tryBlock((d2*n1 - d1*n2), (d1*d2));
 }
 // Subtraction Overload
 void Fractions::Subtract(int Nnum1, int Dnum1, int Nnum2, int Dnum2)
@@ -67,16 +55,7 @@ void Fractions::Subtract(int Nnum1, int Dnum1, int Nnum2, int Dnum2)
 // Multiplication
 void Fractions::Multiply()
 {
-	int dvsr = gcd(abs(n1*n2), abs(d1*d2));
-
-	if (abs(n1*n2) == abs(d1*d2) || abs(d1*d2) / dvsr == 1 || (d1*d2) == 0)
-	{
-		tryBlock((n1*n2), (d1*d2));
-	}
-	else
-	{
-		cout << (n1*n2) / dvsr << " / " << (d1*d2) / dvsr << endl;
-	}
+	tryBlock((n1*n2), (d1*d2));
 }
 //Multiplication Overload
 void Fractions::Multiply(int Nnum1, int Dnum1, int Nnum2, int Dnum2)
@@ -87,15 +66,13 @@ void Fractions::Multiply(int Nnum1, int Dnum1, int Nnum2, int Dnum2)
 // Division
 void Fractions::Divide()
 {
-	int dvsr = gcd(abs(n1*d2), abs(d1*n2));
-
-	if (abs(n1*d2) == abs(d1*n2) || abs(d1*n2 / dvsr) == 1)
+	if (d1 == 0 || d2 == 0)
 	{
-		tryBlock((n1*d2), (d1*n2));
+		cout << "Math Error! : Division by zero encountered.";
 	}
 	else
 	{
-		cout << (n1*d2) / dvsr << " / " << (d1*n2) / dvsr << endl;
+		tryBlock((n1*d2), (d1*n2));
 	}
 }
 // Division Overload
